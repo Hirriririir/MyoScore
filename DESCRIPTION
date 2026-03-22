@@ -1,0 +1,36 @@
+Package: MyoScore
+Title: A Genetically-Informed Transcriptomic Scoring System for Quantifying
+    Human Skeletal Muscle Health
+Version: 1.0.0
+Authors@R:
+    person("Huahua", "Zhong", email = "huahuazhong@fudan.edu.cn",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7852-3982"))
+Description: Calculate the MyoScore (Genetic Muscle Health Score, GMHS) from
+    bulk RNA-seq raw count data. MyoScore quantifies muscle health across five
+    genetically-driven dimensions (Strength, Mass, LeanMuscle, Youth, Resilience)
+    based on GWAS-TWAS integration of 28 muscle-related phenotypes. Provides
+    preprocessing (CPM normalization), dimension-level and composite scoring
+    (0-100 scale), and visualization utilities (radar charts, grouped boxplots).
+License: MIT + file LICENSE
+URL: https://github.com/Hirriririir/MyoScore
+BugReports: https://github.com/Hirriririir/MyoScore/issues
+Depends:
+    R (>= 4.0.0)
+Imports:
+    stats,
+    utils,
+    graphics,
+    grDevices
+Suggests:
+    ggplot2 (>= 3.4.0),
+    fmsb,
+    patchwork,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr

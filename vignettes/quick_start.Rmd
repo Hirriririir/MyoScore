@@ -1,0 +1,130 @@
+---
+title: "Quick Start: MyoScore"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quick Start: MyoScore}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+MyoScore (Genetic Muscle Health Score) quantifies skeletal muscle health
+from bulk RNA-seq raw count data across five genetically-driven dimensions:
+
+| Dimension | Weight | GWAS Basis | Meaning |
+|-----------|--------|------------|---------|
+| Strength | 25.2% | Grip strength, walking pace | Muscle function |
+| Mass | 17.7% | Fat-free mass (whole body, limbs) | Muscle quantity |
+| LeanMuscle | 24.3% | Thigh fat infiltration MRI | Low fat = healthy |
+| Youth | 24.2% | Telomere length | Biological age |
+| Resilience | 8.7% | Myopathy diagnosis, CK levels | Disease resistance |
+
+**Higher score = healthier muscle** (0-100 scale).
+
+## Installation
+
+```r
+# From GitHub
+devtools::install_github("hua-xie/MyoScore")
+```
+
+## Basic Usage
+
+### Calculate MyoScore from a count matrix
+
+```{r basic, eval = FALSE}
+library(MyoScore)
+
+# From a CSV file (genes as rows, samples as columns)
+scores <- myoscore_score("path/to/raw_counts.csv")
+
+# From a matrix in R
+scores <- myoscore_score(count_matrix)
+
+# For tab-separated files
+scores <- myoscore_score("counts.tsv", sep = "\t")
+```
+
+The output is a data.frame with 6 columns per sample:
+
+- `Strength_score`, `Mass_score`, `LeanMuscle_score`, `Youth_score`,
+  `Resilience_score` (individual dimensions, 0-100)
+- `MyoScore` (weighted composite, 0-100)
+
+### Explore the gene weights
+
+```{r genes}
+library(MyoScore)
+data(myoscore_genes)
+head(myoscore_genes)
+table(myoscore_genes$dimension)
+```
+
+### Preprocessing only
+
+```{r preprocess, eval = FALSE}
+# Just normalize without scoring
+log2cpm <- myoscore_preprocess(count_matrix)
+```
+
+### Single dimension
+
+```{r single_dim, eval = FALSE}
+log2cpm <- myoscore_preprocess(count_matrix)
+youth <- myoscore_score_dimension(log2cpm, dimension = "Youth")
+```
+
+## Visualization
+
+### Radar chart
+
+```{r radar, eval = FALSE}
+# Requires: install.packages("fmsb")
+
+# Overall mean radar
+myoscore_plot_radar(scores)
+
+# Grouped by condition
+myoscore_plot_radar(scores, groups = metadata$condition)
+```
+
+### Grouped boxplot
+
+```{r boxplot, eval = FALSE}
+# Requires: install.packages("ggplot2")
+
+# Compare MyoScore across groups
+myoscore_plot_boxplot(scores, groups = metadata$condition)
+
+# All dimensions
+myoscore_plot_boxplot(scores, groups = metadata$condition, which = "all")
+```
+
+## Input Requirements
+
+- **Format**: Raw count matrix (not TPM, FPKM, or normalized values)
+- **Genes**: Gene Symbols as row names (not Ensembl IDs)
+- **Samples**: At least 2 samples (recommend >= 20 for reliable normalization)
+- **Coverage**: Typical bulk RNA-seq datasets contain ~417 of the 1,116 scoring
+  genes (~50% per dimension), which is sufficient for reliable scoring.
+
+## Color Palette
+
+```{r colors}
+myoscore_colors("dimensions")
+myoscore_colors("spectrum")
+```
+
+## Citation
+
+> Revealing myopathy spectrum: integrating transcriptional and clinical
+> features of human skeletal muscles with varying health conditions.
+> *Communications Biology*, 2024.
