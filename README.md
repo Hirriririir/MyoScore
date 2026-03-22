@@ -1,4 +1,4 @@
-# MyoScore <img src="man/figures/logo.png" align="right" height="139" />
+# MyoScore <img src="man/figures/logo.svg" align="right" height="139" />
 
 **A genetically-informed transcriptomic scoring system for quantifying human skeletal muscle health**
 
