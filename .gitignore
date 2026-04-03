@@ -7,3 +7,5 @@ inst/doc
 *.Rcheck
 *.tar.gz
 test_myoscore.R
+.claude
+analysis/

@@ -44,9 +44,13 @@
 #'
 #' @export
 #' @examples
-#' # With a count matrix
-#' \dontrun{
-#' scores <- myoscore_score("path/to/counts.csv")
+#' # Create a small example count matrix (50 genes x 10 samples)
+#' set.seed(42)
+#' genes <- head(MyoScore::myoscore_genes$ID, 50)
+#' counts <- matrix(rpois(50 * 10, lambda = 100), nrow = 50,
+#'                  dimnames = list(genes, paste0("S", 1:10)))
+#' \donttest{
+#' scores <- myoscore_score(counts, verbose = FALSE)
 #' head(scores)
 #' }
 myoscore_score <- function(input,

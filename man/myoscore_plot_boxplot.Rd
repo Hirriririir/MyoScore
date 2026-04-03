@@ -42,9 +42,17 @@ Create grouped boxplots comparing MyoScore or individual dimension scores
 across conditions. Uses base R graphics by default, or ggplot2 if available.
 }
 \examples{
-\dontrun{
-scores <- myoscore_score("counts.csv")
-myoscore_plot_boxplot(scores, groups = metadata$condition)
-myoscore_plot_boxplot(scores, groups = metadata$condition, which = "all")
+# Create example scores and groups
+scores_df <- data.frame(
+  Strength_score  = c(rnorm(5, 55, 5), rnorm(5, 40, 5)),
+  Mass_score      = c(rnorm(5, 50, 5), rnorm(5, 45, 5)),
+  LeanMuscle_score = c(rnorm(5, 48, 5), rnorm(5, 38, 5)),
+  Youth_score     = c(rnorm(5, 52, 5), rnorm(5, 35, 5)),
+  Resilience_score = c(rnorm(5, 50, 5), rnorm(5, 45, 5)),
+  MyoScore        = c(rnorm(5, 50, 3), rnorm(5, 40, 3))
+)
+groups <- rep(c("Healthy", "Disease"), each = 5)
+\donttest{
+myoscore_plot_boxplot(scores_df, groups = groups)
 }
 }

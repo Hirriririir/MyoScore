@@ -8,7 +8,10 @@ dimensions based on GWAS-TWAS integration of 28 muscle-related phenotypes.
 ## Installation
 
 ```r
-# Install from GitHub
+# Install from CRAN
+install.packages("MyoScore")
+
+# or Install from GitHub
 devtools::install_github("Hirriririir/MyoScore")
 ```
 

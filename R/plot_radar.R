@@ -25,13 +25,11 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#' scores <- myoscore_score("counts.csv")
-#' # Single radar for all samples (mean)
-#' myoscore_plot_radar(scores)
-#'
-#' # Grouped by condition
-#' myoscore_plot_radar(scores, groups = metadata$condition)
+#' # Radar chart from a named vector of dimension scores
+#' dim_scores <- c(Strength = 55, Mass = 48, LeanMuscle = 42,
+#'                 Youth = 60, Resilience = 50)
+#' \donttest{
+#' myoscore_plot_radar(dim_scores)
 #' }
 myoscore_plot_radar <- function(scores,
                                 groups = NULL,

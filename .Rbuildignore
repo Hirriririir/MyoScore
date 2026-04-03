@@ -4,3 +4,5 @@
 ^README\.Rmd$
 ^\.github$
 ^test_myoscore\.R$
+^\.claude$
+^analysis$
