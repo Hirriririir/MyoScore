@@ -3,7 +3,7 @@
 **A genetically-informed transcriptomic scoring system for quantifying human skeletal muscle health**
 
 MyoScore quantifies skeletal muscle health across five genetically-driven
-dimensions based on GWAS-TWAS integration of 28 muscle-related phenotypes.
+dimensions based on GWAS-TWAS integration of 27 muscle-related phenotypes.
 
 ## Installation
 
